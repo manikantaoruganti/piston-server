@@ -1,3 +1,6 @@
 FROM ghcr.io/engineer-man/piston
 
-EXPOSE 2000
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
