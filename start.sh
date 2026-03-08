@@ -1,7 +1,10 @@
 #!/bin/sh
+
 mkdir -p /tmp/isolate /tmp/storage
 export ISOLATE_DIR=/tmp/isolate
 export STORAGE_DIR=/tmp/storage
+
+# Install languages
 ppman install python
 ppman install gcc
 ppman install g++
@@ -18,4 +21,6 @@ ppman install php
 ppman install r
 ppman install scala
 ppman install sqlite
+
+# Start Piston
 ./piston
