@@ -1,4 +1,10 @@
-FROM ghcr.io/engineer-man/piston
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y curl git build-essential pkg-config libssl-dev cargo
+
+RUN git clone https://github.com/engineer-man/piston.git /piston
+WORKDIR /piston
+RUN cargo build --release
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
