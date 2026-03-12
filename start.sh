@@ -4,9 +4,9 @@ mkdir -p /tmp/isolate /tmp/storage
 export ISOLATE_DIR=/tmp/isolate
 export STORAGE_DIR=/tmp/storage
 
-cd /piston
+cd /piston/api
 
-# Install languages
+# Install 16 languages
 ./target/release/ppman install python
 ./target/release/ppman install gcc
 ./target/release/ppman install g++
@@ -24,5 +24,5 @@ cd /piston
 ./target/release/ppman install scala
 ./target/release/ppman install sqlite
 
-# Start Piston without authentication
+# Start piston without auth
 ./target/release/piston --disable-auth
