@@ -24,5 +24,5 @@ cd /piston
 ./target/release/ppman install scala
 ./target/release/ppman install sqlite
 
-# Start piston without auth
+# Start Piston without authentication
 ./target/release/piston --disable-auth
