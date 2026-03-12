@@ -1,6 +1,7 @@
+# Base image
 FROM ubuntu:22.04
 
-# Install dependencies
+# Install dependencies for Piston and isolate
 RUN apt-get update && apt-get install -y \
     curl \
     git \
@@ -13,14 +14,15 @@ RUN apt-get update && apt-get install -y \
     automake \
     autoconf \
     libtool \
-    pkg-config \
     zlib1g-dev \
     libncurses5-dev \
     wget \
     unzip \
+    libcap-dev \
+    libsystemd-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install isolate from source
+# Build and install isolate from source
 RUN git clone https://github.com/ioi/isolate.git /tmp/isolate-src \
     && cd /tmp/isolate-src \
     && make \
@@ -30,6 +32,7 @@ RUN git clone https://github.com/ioi/isolate.git /tmp/isolate-src \
 # Clone Piston
 RUN git clone https://github.com/engineer-man/piston.git /piston
 
+# Set working directory
 WORKDIR /piston/api
 
 # Build Piston API
@@ -39,7 +42,7 @@ RUN cargo build --release
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-# Expose port
+# Expose default Piston port
 EXPOSE 2000
 
 # Start Piston
