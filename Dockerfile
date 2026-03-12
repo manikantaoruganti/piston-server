@@ -10,7 +10,7 @@ cargo
 
 RUN git clone https://github.com/engineer-man/piston.git /piston
 
-WORKDIR /piston
+WORKDIR /piston/api
 
 RUN cargo build --release
 
