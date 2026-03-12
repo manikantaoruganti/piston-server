@@ -6,7 +6,8 @@ git \
 build-essential \
 pkg-config \
 libssl-dev \
-cargo
+cargo \
+isolate
 
 RUN git clone https://github.com/engineer-man/piston.git /piston
 
