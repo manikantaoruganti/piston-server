@@ -1,13 +1,17 @@
 #!/bin/sh
 
-# Create directories for isolate and storage
+set -e
+
+echo "Preparing isolate directories..."
+
 mkdir -p /tmp/isolate /tmp/storage
 export ISOLATE_DIR=/tmp/isolate
 export STORAGE_DIR=/tmp/storage
 
 cd /piston/api
 
-# Install 16 languages
+echo "Installing runtimes..."
+
 ./target/release/ppman install python
 ./target/release/ppman install gcc
 ./target/release/ppman install g++
@@ -25,5 +29,8 @@ cd /piston/api
 ./target/release/ppman install scala
 ./target/release/ppman install sqlite
 
-# Start Piston without authentication
-./target/release/piston --disable-auth
+echo "Starting piston on port $PORT"
+
+exec ./target/release/piston \
+  --disable-auth \
+  --port ${PORT:-2000}
