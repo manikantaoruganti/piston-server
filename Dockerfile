@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
     curl \
     git \
@@ -17,20 +19,23 @@ RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     libcap-dev \
-    libsystemd-dev \
+    libseccomp-dev \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
+# Install isolate correctly
 RUN git clone https://github.com/ioi/isolate.git /tmp/isolate-src \
     && cd /tmp/isolate-src \
-    && make \
-    && cp isolate /usr/local/bin/ \
+    && make isolate \
+    && install isolate /usr/local/bin \
     && rm -rf /tmp/isolate-src
 
+# Clone piston
 RUN git clone https://github.com/engineer-man/piston.git /piston
 
 WORKDIR /piston/api
 
+# Build piston API
 RUN cargo build --release
 
 COPY start.sh /start.sh
