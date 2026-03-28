@@ -2,9 +2,8 @@
 
 set -e
 
-echo "Preparing isolate directories..."
-
 mkdir -p /tmp/isolate /tmp/storage
+
 export ISOLATE_DIR=/tmp/isolate
 export STORAGE_DIR=/tmp/storage
 
@@ -29,7 +28,7 @@ echo "Installing runtimes..."
 ./target/release/ppman install scala
 ./target/release/ppman install sqlite
 
-echo "Starting piston on port $PORT"
+echo "Starting piston..."
 
 exec ./target/release/piston \
   --disable-auth \
