@@ -2,34 +2,21 @@
 
 set -e
 
-mkdir -p /tmp/isolate /tmp/storage
+./piston ppman install python
+./piston ppman install node
+./piston ppman install go
+./piston ppman install bash
+./piston ppman install java
+./piston ppman install gcc
+./piston ppman install g++
+./piston ppman install rust
+./piston ppman install typescript
+./piston ppman install dotnet
+./piston ppman install kotlin
+./piston ppman install swift
+./piston ppman install ruby
+./piston ppman install php
+./piston ppman install r
+./piston ppman install scala
 
-export ISOLATE_DIR=/tmp/isolate
-export STORAGE_DIR=/tmp/storage
-
-cd /piston/api
-
-echo "Installing runtimes..."
-
-./target/release/ppman install python
-./target/release/ppman install gcc
-./target/release/ppman install g++
-./target/release/ppman install java
-./target/release/ppman install node
-./target/release/ppman install typescript
-./target/release/ppman install rust
-./target/release/ppman install dotnet
-./target/release/ppman install kotlin
-./target/release/ppman install go
-./target/release/ppman install swift
-./target/release/ppman install ruby
-./target/release/ppman install php
-./target/release/ppman install r
-./target/release/ppman install scala
-./target/release/ppman install sqlite
-
-echo "Starting piston..."
-
-exec ./target/release/piston \
-  --disable-auth \
-  --port ${PORT:-2000}
+exec ./piston run --disable-auth --port ${PORT}
