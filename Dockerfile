@@ -1,21 +1,23 @@
 FROM ghcr.io/engineer-man/piston:latest
 
-# Install required runtimes at build time
-RUN ppman install python \
- && ppman install node \
- && ppman install go \
- && ppman install bash \
- && ppman install java \
- && ppman install gcc \
- && ppman install g++ \
- && ppman install rust \
- && ppman install typescript \
- && ppman install dotnet \
- && ppman install kotlin \
- && ppman install swift \
- && ppman install ruby \
- && ppman install php \
- && ppman install r \
- && ppman install scala
+# Install runtimes correctly using internal path
+RUN /piston/packages/ppman install python \
+ && /piston/packages/ppman install node \
+ && /piston/packages/ppman install go \
+ && /piston/packages/ppman install bash \
+ && /piston/packages/ppman install java \
+ && /piston/packages/ppman install gcc \
+ && /piston/packages/ppman install g++ \
+ && /piston/packages/ppman install rust \
+ && /piston/packages/ppman install typescript \
+ && /piston/packages/ppman install dotnet \
+ && /piston/packages/ppman install kotlin \
+ && /piston/packages/ppman install swift \
+ && /piston/packages/ppman install ruby \
+ && /piston/packages/ppman install php \
+ && /piston/packages/ppman install r \
+ && /piston/packages/ppman install scala
 
 EXPOSE 2000
+
+CMD ["/api"]
