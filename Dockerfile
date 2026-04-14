@@ -1,10 +1,7 @@
-FROM ghcr.io/engineer-man/piston
+FROM ghcr.io/engineer-man/piston:latest
 
 ENV PORT=10000
 
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
 EXPOSE 10000
 
-CMD ["/start.sh"]
+CMD ["bash", "-c", "cd /piston && ./piston run --disable-auth --port ${PORT}"]
